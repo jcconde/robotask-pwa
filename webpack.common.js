@@ -1,12 +1,13 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: './src/index.js',
-        print: './src/print.js'
+        app: './src/js/main.js',
+        print: './src/js/print.js'
     },
     output: {
         filename: '[name].bundle.js',
@@ -31,11 +32,42 @@ module.exports = {
                 ]
             },
             {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                        },
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: true,
+                        },
+                    },
+                ],
+            },
+            {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
-                    'css-loader'
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                        },
+                    }
                 ]
+            },
+            {
+                test: /\.scss$/,
+                loaders: ['style', 'css', 'postcss', 'sass']
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -48,6 +80,10 @@ module.exports = {
                 use: [
                     'file-loader'
                 ]
+            },
+            {
+                test: /bootstrap\/dist\/js\/umd\//,
+                loader: 'imports?jQuery=jquery'
             }
         ]
     },
@@ -55,7 +91,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
             title: 'Progressive Web Application',
-            template: "./public/views/index.html",
+            template: "./src/view/index.html",
             filename: "./index.html"
         }),
         new WorkboxPlugin.GenerateSW({
@@ -63,6 +99,11 @@ module.exports = {
             // and not allow any straggling "old" SWs to hang around
             clientsClaim: true,
             skipWaiting: true
+        }),
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery',
+            jquery: 'jquery'
         })
     ]
 };
