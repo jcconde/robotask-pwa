@@ -4,13 +4,10 @@ var mainBowerFiles = require('main-bower-files');
 var sourcemap = require('gulp-sourcemaps');
 
 var path = require('path');
-var merge = require('merge2');
 
 var paths = {
     source: "src/",
-    public: [ '*public/images/**/*', '*public/javascripts/**/*', '*views/**/*'],
-    output: "dist/",
-    spec: "spec/"
+    output: "dist/"
 }
 
 gulp.task('bower', function() {
@@ -26,21 +23,21 @@ gulp.task('bower', function() {
         }
     }), {
         base: 'bower_components'
-    }).pipe(gulp.dest(paths.output + 'public/stylesheets/lib'));
+    }).pipe(gulp.dest(paths.output + 'css/lib'));
 });
 
-gulp.task('copy', function () {
-    return gulp.src(paths.public).pipe(gulp.dest(paths.output));
+gulp.task('copy-images', function () {
+    return gulp.src('src/media/images/**/*').pipe(gulp.dest(paths.output + 'media/images'));
 });
 
 gulp.task('less', function () {
-    return gulp.src('public/stylesheets/**/*.less')
+    return gulp.src('src/css/**/*.less')
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
-        .pipe(gulp.dest(paths.output + 'public/stylesheets'));
+        .pipe(gulp.dest(paths.output + 'css'));
 });
 
-gulp.task('default', gulp.parallel(['copy', 'less', 'bower']));
+gulp.task('default', gulp.parallel(['copy-images', 'less', 'bower']));
 
-gulp.task('dev', gulp.parallel(['copy', 'less', 'bower']));
+gulp.task('dev', gulp.parallel(['copy-images', 'less', 'bower']));

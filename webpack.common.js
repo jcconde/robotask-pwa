@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -27,7 +28,7 @@ module.exports = {
                 use: [
                     {
                         loader: "html-loader",
-                        options: {minimize: true}
+                        options: {minimize: false}
                     }
                 ]
             },
@@ -40,13 +41,13 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true,
+                            sourceMap: false,
                         },
                     },
                     {
                         loader: 'less-loader',
                         options: {
-                            sourceMap: true,
+                            sourceMap: false,
                         },
                     },
                 ],
@@ -60,7 +61,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true,
+                            sourceMap: false,
                         },
                     }
                 ]
@@ -92,7 +93,14 @@ module.exports = {
         new HtmlWebPackPlugin({
             title: 'Progressive Web Application',
             template: "./src/view/index.html",
-            filename: "./index.html"
+            filename: "./index.html",
+            chunks: ['app']
+        }),
+        new HtmlWebPackPlugin({
+            title: 'Progressive Web Application',
+            template: "./src/view/option-a.html",
+            filename: "./option-a.html",
+            chunks: ['app', 'print']
         }),
         new WorkboxPlugin.GenerateSW({
             // these options encourage the ServiceWorkers to get in there fast
