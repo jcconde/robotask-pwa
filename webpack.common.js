@@ -3,12 +3,11 @@ const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
         app: './src/js/main.js',
-        print: './src/js/print.js'
+        'option-a': './src/js/option/option-a.js'
     },
     output: {
         filename: '[name].bundle.js',
@@ -85,22 +84,31 @@ module.exports = {
             {
                 test: /bootstrap\/dist\/js\/umd\//,
                 loader: 'imports?jQuery=jquery'
+            },
+            {
+                test: /\.pug$/,
+                use: ['pug-loader']
             }
         ]
     },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
-            title: 'Progressive Web Application',
-            template: "./src/view/index.html",
+            template: './src/view/index.pug',
             filename: "./index.html",
             chunks: ['app']
         }),
+        // new HtmlWebPackPlugin({
+        //     title: 'Progressive Web Application',
+        //     template: "./src/view/index.html",
+        //     filename: "./index.html",
+        //     chunks: ['app']
+        // }),
         new HtmlWebPackPlugin({
             title: 'Progressive Web Application',
-            template: "./src/view/option-a.html",
-            filename: "./option-a.html",
-            chunks: ['app', 'print']
+            template: "./src/view/option/a.pug",
+            filename: "./option/a.html",
+            chunks: ['app', 'option-a']
         }),
         new WorkboxPlugin.GenerateSW({
             // these options encourage the ServiceWorkers to get in there fast
