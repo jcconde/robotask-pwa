@@ -114,46 +114,23 @@ staging.merge({
     },
 }, "Merging branch WW-901-modificar-shipping into staging");
 
-// // Merge fb1 into staging
-// master.merge({
-//     branch: fb1,
-//     // fastForward: false,
-//     commitOptions: {
-//         // Every valid `options` for a commit
-//     },
-// }, "Merging branch WW-901-modificar-shipping into staging");
-// master.merge({
-//     branch: fb2,
-//     // fastForward: false,
-//     commitOptions: {
-//         // Every valid `options` for a commit
-//     },
-// }, "Merging branch WW-901-modificar-shipping into staging");
-// master.merge({
-//     branch: fb3,
-//     // fastForward: false,
-//     commitOptions: {
-//         // Every valid `options` for a commit
-//     },
-// }, "Merging branch WW-901-modificar-shipping into staging");
+// Merge fb2 into uat
+uat.merge({
+    branch: fb2,
+    // fastForward: false,
+    commitOptions: {
+        // Every valid `options` for a commit
+    },
+}, "Merging branch WC-902-modificar-category into uat");
 
-// // Merge fb2 into uat
-// uat.merge({
-//     branch: fb2,
-//     // fastForward: false,
-//     commitOptions: {
-//         // Every valid `options` for a commit
-//     },
-// }, "Merging branch WC-902-modificar-category into uat");
-//
-// // Merge fb3 into uat
-// uat.merge({
-//     branch: fb3,
-//     // fastForward: false,
-//     commitOptions: {
-//         // Every valid `options` for a commit
-//     },
-// }, "Merging branch WM-903-modificar-sidebar into uat");
+// Merge fb3 into uat
+uat.merge({
+    branch: fb3,
+    // fastForward: false,
+    commitOptions: {
+        // Every valid `options` for a commit
+    },
+}, "Merging branch WM-903-modificar-sidebar into uat");
 
 const releaseBranch190 = master.branch("WOOW-190-release-branch-2019-31-07");
 releaseBranch190.merge({
@@ -163,13 +140,6 @@ releaseBranch190.merge({
         // Every valid `options` for a commit
     },
 }, "Merging branch WW-901-modificar-shipping into release branch");
-// releaseBranch190.merge({
-//     branch: fb2,
-//     // fastForward: false,
-//     commitOptions: {
-//         // Every valid `options` for a commit
-//     },
-// }, "Merging branch WW-902-modificar-category into release branch");
 releaseBranch190.merge({
     branch: fb3,
     // fastForward: false,
@@ -188,19 +158,19 @@ master.merge({
 }, "Merging branch releaseBranch190 into master");
 
 // Merge fb1 into staging
-// uat.merge({
-//     branch: master,
-//     // fastForward: false,
-//     commitOptions: {
-//         // Every valid `options` for a commit
-//     },
-// }, "Merging branch releaseBranch190 into uat");
+uat.merge({
+    branch: master,
+    // fastForward: false,
+    commitOptions: {
+        // Every valid `options` for a commit
+    },
+}, "Merging branch releaseBranch190 into uat");
 
 // Merge fb1 into staging
-// staging.merge({
-//     branch: master,
-//     // fastForward: false,
-//     commitOptions: {
-//         // Every valid `options` for a commit
-//     },
-// }, "Merging branch releaseBranch190 into staging");
+staging.merge({
+    branch: master,
+    // fastForward: false,
+    commitOptions: {
+        // Every valid `options` for a commit
+    },
+}, "Merging branch releaseBranch190 into staging");
