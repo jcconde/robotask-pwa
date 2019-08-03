@@ -2,8 +2,7 @@
 
 Proyecto demo que usa gitgraph/js para dibujar un git graph bastante amigable
 
-> Ejemplo de lo que se puede hacer con la librería [GitGraph.js][gitgraph-repo].
-## 👉 Try it with [the online playground][playground]
+## 👉 Try it with [the online playground](https://codepen.io/nicoespeon/pen/arqPWb?editors=1010)
 
 ## Iniciar la demo
 
@@ -12,14 +11,15 @@ Necesitamos realizar los siguientes pasos
 npm run install
 npm run dev
 ```
-Con `npm run dev` el proyecto automáticamente se abre en tu navegador por defecto
+Con `npm run dev` el proyecto automáticamente se abre en tu navegador por defecto, ademas de que cualquier modificación que se haga en los archivos del folder src, este se refresca automáticamente en tu browser.
+
 Finalmente dar click en el botón view details de la opción 1
 
 ### Listo para usar
 
-En la ruta src/js/option/option-a.js tenemos un ejemplo de como usar la librería gitgraph
+En la ruta src/js/option/option-a.js tenemos un ejemplo de como usar la librería gitgraph.
 
-Abajo se muestra como customizar la vista de gitgraph 
+Abajo se muestra como customizar la vista de gitgraph.
 ```javascript
 /***********************
  *  CUSTOM TEMPLATES   *
