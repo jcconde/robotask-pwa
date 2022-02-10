@@ -1,0 +1,11 @@
+*
+!bin
+!bin/**
+!src
+!src/**
+!.gitignore
+!.php_cs.dist.php
+!.pre-commit-config.yaml
+!composer.json
+!composer.lock
+!VERSION

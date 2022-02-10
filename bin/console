@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+
+$pharPath = \Phar::running(true);
+if ($pharPath) {
+    $autoloaderPath = "$pharPath/vendor/autoload.php";
+} else {
+    if (file_Exists(__DIR__ . '/../vendor/autoload.php')) {
+        $autoloaderPath = __DIR__ . '/../vendor/autoload.php';
+    } elseif (file_Exists(__DIR__ . '/../../../vendor/autoload.php')) {
+        $autoloaderPath = __DIR__ . '/../../../vendor/autoload.php';
+    } else {
+        die("Could not find autoloader. Run 'composer install'");
+    }
+}
+
+$classLoader = require $autoloaderPath;
+
+$appName = "Robotask PWA";
+$appVersion = trim(file_get_contents(__DIR__ . '/../VERSION'));
+$commandClasses = [\Onetree\Pwa\Commands\BuildCommands::class];
+$selfUpdateRepository = 'onetree/console-pwa';
+$configurationFilename = 'console-pwa.yaml';
+
+// Define our Runner, and pass it the command classes we provide.
+$runner = new \Robo\Runner($commandClasses);
+$runner->setSelfUpdateRepository($selfUpdateRepository);
+$runner->setConfigurationFilename($configurationFilename);
+$runner->setClassLoader($classLoader);
+
+$output = new \Symfony\Component\Console\Output\ConsoleOutput();
+$statusCode = $runner->execute($argv, $appName, $appVersion, $output);
+
+exit($statusCode);

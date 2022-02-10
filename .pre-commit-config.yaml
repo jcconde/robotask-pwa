@@ -1,0 +1,30 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1  # Use the sha / tag you want to point at
+    hooks:
+      - id: check-xml
+      - id: check-merge-conflict
+  - repo: https://github.com/netz98/pre-commit-php
+    rev: 1.3.0  # Use the sha / tag you want to point at
+    hooks:
+      - id: php-lint
+      - id: php-cbf
+        files: \.(php)$
+        args:
+          - --standard=PSR12
+          - -p
+      - id: php-cs
+        files: \.(php)$
+        args:
+          - --standard=PSR12
+          - -p
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: 'v8.2.0'  # Use the sha / tag you want to point at
+    hooks:
+      - id: eslint
+  - repo: https://gitlab.com/daverona/pre-commit/php
+    rev: 0.6.0          # use the most recent version
+    hooks:
+      # Hooks using native
+      - id: phpmd         # static analyzer for PHP code
+
