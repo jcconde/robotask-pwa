@@ -23,7 +23,7 @@
     },
     "scripts": {
         "code:fixer": "vendor/bin/php-cs-fixer fix src --config=.php_cs.dist.php",
-        "code:sniffer": "vendor/bin/phpcs src --standard=PSR12",
+        "code:sniffer": "vendor/bin/phpcbf src --standard=PSR12 && vendor/bin/phpcs src --standard=PSR12",
         "code:md": "vendor/bin/phpmd ./src text cleancode cleancode, codesize, controversial, design, naming, unusedcode"
     }
 }
